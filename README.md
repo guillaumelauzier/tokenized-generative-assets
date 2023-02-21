@@ -80,6 +80,9 @@ The evaluate() function evaluates the performance of the local model on the give
 - local_model.h defines a LocalModel class in C++ for use in federated learning. The class takes in a reference to a GlobalModel object in the constructor as well as an integer representing the number of samples that the local model should use for training. The LocalModel class has the following member functions:
 
 train: This function is used to train the local model using the samples and labels passed as arguments. The learning rate is also provided as an argument to update the weights of the model.
+
 get_weights: This function returns the weights of the local model.
+
 evaluate: This function is used to evaluate the performance of the local model on the provided samples and labels.
+
 The LocalModel class is defined in a header file and the GlobalModel class is included as a separate header file. The #pragma once directive is used to ensure that the header file is included only once in the compilation process.
