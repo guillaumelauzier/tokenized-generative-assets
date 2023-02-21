@@ -14,3 +14,5 @@ The supply chain of tokenized generative assets can involve several steps, which
 - Impact investors who invest in NFTs can generate monetized digital assets through the purchase of tokenized generative artworks. Institutions that buy these NFTs may use the resulting profits to invest in activities that support the initial philanthropic cause, such as environmental or social initiatives. Examples of such institutions include museums, galleries, or private collectors who may choose to display the artwork or keep it as an investment. By investing in NFTs, these institutions can not only support philanthropic causes, but also potentially benefit financially from their investment.
 
 The exact supply chain may vary depending on the specific platform or marketplace used for the sale of the tokenized generative asset, as well as the specific data sources and generative algorithms used to create the artwork.
+
+# Code explained
