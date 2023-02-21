@@ -46,3 +46,15 @@ float LocalModel::evaluate(const std::vector<std::vector<float>>& samples, const
         float pred = 0.0f;
         const int num_features = sample.size();
        
+    for (int j = 0; j < num_features; j++) {
+        pred += m_weights[j] * sample[j];
+        }
+    // Check prediction against true label
+    if ((pred > 0.0f && labels[i] == 1) || (pred <= 0.0f && labels[i] == -1)) {
+        num_correct++;
+        }
+    }
+return (float)num_correct / (float)num_samples;
+}
+
+
