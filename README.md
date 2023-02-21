@@ -16,3 +16,11 @@ The supply chain of tokenized generative assets can involve several steps, which
 The exact supply chain may vary depending on the specific platform or marketplace used for the sale of the tokenized generative asset, as well as the specific data sources and generative algorithms used to create the artwork.
 
 # Code explained
+
+- dataprovider.sol contract allows authorized data providers to provide geographic data of food supply by calling the provideData function and sending the specified amount of ether as payment. The contract owner can set the price per data using the setPricePerData function and add or remove authorized providers using the addAuthorizedProvider and removeAuthorizedProvider functions. The withdraw function allows the owner to withdraw the balance of ether stored in the contract. The DataProvided event is emitted when data is successfully provided by an authorized provider.
+
+- generativeartist.sol contract allows the creation of ERC721 tokens that represent generative art maps based on geographic data of food supply. The mint function can be used to create a new token and assign ownership to a specified address. The getArtworkData and getArtworkAuthor functions can be used to retrieve the data and author of the artwork associated with a specific token ID.
+
+To use this contract, you would first need to deploy it to a blockchain network such as Ethereum. Once deployed, you could interact with the contract using a wallet application that supports ERC721 tokens, such as MetaMask. You would then be able to create new tokens by calling the mint function and passing in the necessary data and author information. These tokens could then be sold or traded on various online marketplaces.
+
+- 
