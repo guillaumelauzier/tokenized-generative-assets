@@ -49,4 +49,14 @@ The calculation of the royalties is done in the _transfer function, where the to
 
 Note that this code assumes that the AI model contract has a payable fallback function to receive the royalties. If the AI model contract does not have a payable fallback function, you may need to modify the code accordingly.
 
-- globalmode
+- global_model.cpp implementation of the GlobalModel class defined in global_model.h in the previous example.
+
+The constructor of the class takes an integer argument num_weights and initializes the member variable m_weights to a vector of size num_weights with all elements set to 0.0f.
+
+The update_weights function takes a std::vector<float> argument delta_weights, which represents the update to be made to the global model's weights. The function loops over the elements of the delta_weights vector and adds each element to the corresponding element of the m_weights vector.
+
+The get_weights function returns a constant reference to the m_weights vector, which allows external code to access the weights of the global model without modifying them.
+
+Together, these functions allow the global model to be initialized with a specific number of weights, and to be updated and accessed by other components of a federated learning system.
+
+- 
