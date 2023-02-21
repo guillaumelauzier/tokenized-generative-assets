@@ -43,6 +43,10 @@ In addition, the contract overrides the _transfer function to distribute royalti
 
 By incorporating these features into the smart contract, the supply chain for the tokenized generative artwork can be managed more effectively, with clear rules for the distribution of royalties and the allocation of funds for other goods.
 
+- aimodels.sol added a new property to the GenerativeArt contract, which is the address of an AI model contract. When a transfer occurs, the royalties are distributed to the data provider, generative artist, and the AI model contract.
 
+The calculation of the royalties is done in the _transfer function, where the total amount of royalties is divided equally between the three parties. Then, the corresponding amounts are transferred to each party.
+
+Note that this code assumes that the AI model contract has a payable fallback function to receive the royalties. If the AI model contract does not have a payable fallback function, you may need to modify the code accordingly.
 
 
