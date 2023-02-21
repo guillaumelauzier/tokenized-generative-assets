@@ -23,4 +23,16 @@ The exact supply chain may vary depending on the specific platform or marketplac
 
 To use this contract, you would first need to deploy it to a blockchain network such as Ethereum. Once deployed, you could interact with the contract using a wallet application that supports ERC721 tokens, such as MetaMask. You would then be able to create new tokens by calling the mint function and passing in the necessary data and author information. These tokens could then be sold or traded on various online marketplaces.
 
-- 
+- royalties.sol contract implements the IERC2981 interface, which defines a standard way to retrieve information about royalty payments for a given NFT.
+
+The Royalty struct represents a single recipient and their corresponding percentage of the royalty value. The _royalties mapping stores an array of Royalty structs for each token ID.
+
+The royaltyInfo function retrieves the list of royalty recipients and their corresponding amounts for a given token ID and sale value. It calculates the amounts based on the percentage value stored in the _royalties mapping.
+
+The addRoyalty and removeRoyalty functions can be used to add or remove royalty recipients for a given token ID.
+
+To use this smart contract, you can import the Royalties.sol file into your main contract and create a new instance of the Royalties contract. You can then call the addRoyalty function to add recipients and their corresponding percentage values, and the removeRoyalty function to remove recipients. When the NFT is sold, the royalty amounts will be automatically distributed to the recipients based on their percentage values.
+
+
+
+
