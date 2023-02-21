@@ -49,4 +49,4 @@ The calculation of the royalties is done in the _transfer function, where the to
 
 Note that this code assumes that the AI model contract has a payable fallback function to receive the royalties. If the AI model contract does not have a payable fallback function, you may need to modify the code accordingly.
 
-
+- globalmode
