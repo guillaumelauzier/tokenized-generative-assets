@@ -59,4 +59,27 @@ The get_weights function returns a constant reference to the m_weights vector, w
 
 Together, these functions allow the global model to be initialized with a specific number of weights, and to be updated and accessed by other components of a federated learning system.
 
-- 
+- global_model.h defines a class called GlobalModel, which is used to represent the global model in a federated learning system. The GlobalModel class contains three member functions and one private member variable.
+
+The GlobalModel constructor is defined to take an int argument num_weights, which specifies the number of weights in the model. When the constructor is called, it initializes the m_weights vector with num_weights float elements with initial value of 0.
+
+The update_weights function is used to update the weights of the GlobalModel. It takes a const std::vector<float>& argument delta_weights, which represents the changes in the weights that need to be added to the current model. The function iterates through the delta_weights vector and adds each value to the corresponding weight in the m_weights vector.
+
+The get_weights function is used to return the current weights of the model. It returns a const std::vector<float>& reference to the m_weights vector, so that the weights can be read without being copied.
+
+Finally, the m_weights vector is a private member variable of the GlobalModel class, which is used to store the current weights of the model.
+
+- local_model.cpp implementation of the LocalModel class for federated learning. The class takes a GlobalModel object and the number of samples as inputs in the constructor, and initializes the weights of the local model with the weights of the global model plus a bias term of 0.0.
+
+The train() function trains the local model by iterating through the samples, computing a prediction based on the current weights and adding a bias term to each sample. Then, it computes the gradient of the loss function with respect to the weights and updates the weights based on the gradient using the specified learning rate.
+
+The get_weights() function simply returns the current weights of the local model.
+
+The evaluate() function evaluates the performance of the local model on the given set of samples and labels. It computes a prediction for each sample, checks the prediction against the true label, and computes the percentage of correct predictions. The function returns this percentage as a floating point value.
+
+- local_model.h defines a LocalModel class in C++ for use in federated learning. The class takes in a reference to a GlobalModel object in the constructor as well as an integer representing the number of samples that the local model should use for training. The LocalModel class has the following member functions:
+
+train: This function is used to train the local model using the samples and labels passed as arguments. The learning rate is also provided as an argument to update the weights of the model.
+get_weights: This function returns the weights of the local model.
+evaluate: This function is used to evaluate the performance of the local model on the provided samples and labels.
+The LocalModel class is defined in a header file and the GlobalModel class is included as a separate header file. The #pragma once directive is used to ensure that the header file is included only once in the compilation process.
