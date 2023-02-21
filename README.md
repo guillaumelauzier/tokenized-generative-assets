@@ -33,6 +33,16 @@ The addRoyalty and removeRoyalty functions can be used to add or remove royalty 
 
 To use this smart contract, you can import the Royalties.sol file into your main contract and create a new instance of the Royalties contract. You can then call the addRoyalty function to add recipients and their corresponding percentage values, and the removeRoyalty function to remove recipients. When the NFT is sold, the royalty amounts will be automatically distributed to the recipients based on their percentage values.
 
+- supplychain.sol contract extends the Royalties contract to handle the distribution of royalties to the data provider and the generative artist for a tokenized generative artwork. The contract includes several features to support the supply chain of the artwork, including the tracking of spending proposals and the execution of approved proposals.
+
+The contract defines the addresses of the data provider and generative artist, as well as the token ID and URI for the artwork. It also defines a struct to represent a spending proposal, which includes the recipient address, the amount of ether requested, and a flag indicating whether the proposal has been approved.
+
+The contract includes a function to add a spending proposal to the array, which can only be called by the data provider or the generative artist. It also includes a function for recipients to approve a spending proposal, and a function to execute an approved proposal.
+
+In addition, the contract overrides the _transfer function to distribute royalties to the data provider and generative artist, and the tokenURI function to return the custom token URI for the artwork.
+
+By incorporating these features into the smart contract, the supply chain for the tokenized generative artwork can be managed more effectively, with clear rules for the distribution of royalties and the allocation of funds for other goods.
+
 
 
 
