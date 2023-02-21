@@ -1,26 +1,47 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract GenerativeArtNFT {
-    address public dataProvider;
-    address public artist;
-    mapping(uint256 => uint256) public royalties; // Mapping to keep track of royalties for each NFT token ID
+import "@openzeppelin/contracts/interfaces/IERC165.sol";
+import "@openzeppelin/contracts/interfaces/IERC2981.sol";
 
-    constructor(address _dataProvider, address _artist) {
-        dataProvider = _dataProvider;
-        artist = _artist;
+contract Royalties is IERC2981 {
+
+    struct Royalty {
+        address recipient;
+        uint256 value;
     }
 
-    function distributeRoyalties(uint256 tokenId, uint256 salePrice) public {
-        uint256 dataProviderShare = (salePrice * 30) / 100; // 30% share for data provider
-        uint256 artistShare = (salePrice * 70) / 100; // 70% share for artist
+    mapping (uint256 => Royalty[]) private _royalties;
 
-        require(payable(dataProvider).send(dataProviderShare), "Failed to send data provider share");
-        require(payable(artist).send(artistShare), "Failed to send artist share");
+    function royaltyInfo(uint256 tokenId, uint256 value) external view override returns (address[] memory recipients, uint256[] memory amounts) {
+        uint256 length = _royalties[tokenId].length;
+        recipients = new address[](length);
+        amounts = new uint256[](length);
 
-        royalties[tokenId] += artistShare; // Add the artist's share to the royalty mapping
+        for (uint256 i = 0; i < length; i++) {
+            recipients[i] = _royalties[tokenId][i].recipient;
+            amounts[i] = _royalties[tokenId][i].value * value / 10000;
+        }
     }
 
-    function getRoyalties(uint256 tokenId) public view returns (uint256) {
-        return royalties[tokenId];
+    function addRoyalty(uint256 tokenId, address recipient, uint256 value) public {
+        require(recipient != address(0), "Royalties: recipient cannot be zero address");
+        require(value <= 10000, "Royalties: value should be between 0 and 10000");
+
+        _royalties[tokenId].push(Royalty(recipient, value));
+    }
+
+    function removeRoyalty(uint256 tokenId, address recipient) public {
+        uint256 length = _royalties[tokenId].length;
+
+        for (uint256 i = 0; i < length; i++) {
+            if (_royalties[tokenId][i].recipient == recipient) {
+                _royalties[tokenId][i] = _royalties[tokenId][length - 1];
+                _royalties[tokenId].pop();
+                return;
+            }
+        }
+
+        revert("Royalties: recipient not found");
     }
 }
